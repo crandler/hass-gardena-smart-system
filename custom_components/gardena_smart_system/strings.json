@@ -7,11 +7,12 @@
       "cannot_connect": "Failed to connect, please try again.",
       "invalid_auth": "Invalid authentication credentials. Please check your Client ID and Client Secret.",
       "insufficient_permissions": "Insufficient permissions. Please check your API key and permissions.",
-      "no_locations": "No locations found. Please ensure your Gardena Smart System is properly configured.",
+      "no_locations": "No locations found. Please set up your Gardena smart Gateway in the official Gardena app first, then retry.",
       "server_error": "Server error occurred. Please try again later.",
       "auth_error": "Authentication error occurred. Please check your credentials.",
       "unknown_error": "An unexpected error occurred. Please try again.",
       "too_many_requests": "Too many requests, retry later.",
+      "api_error": "Failed to connect to the Gardena API. Please verify your credentials and try again.",
       "unknown": "Unexpected error."
     },
     "step": {

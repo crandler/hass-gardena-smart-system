@@ -61,7 +61,10 @@ class GardenaSmartSystemConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "invalid_auth"
             except GardenaAPIError as ex:
                 _LOGGER.error("API error during configuration: %s (status: %s)", ex, ex.status_code)
-                errors["base"] = "api_error"
+                if ex.status_code == 404:
+                    errors["base"] = "no_locations"
+                else:
+                    errors["base"] = "api_error"
             except Exception as ex:
                 _LOGGER.error("Unexpected error during configuration: %s", ex)
                 errors["base"] = "unknown"

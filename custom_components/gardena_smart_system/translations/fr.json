@@ -7,11 +7,12 @@
       "cannot_connect": "Impossible de se connecter, veuillez ré-essayer.",
       "invalid_auth": "Identifiants d'authentification invalides. Veuillez vérifier votre Client ID et Client Secret.",
       "insufficient_permissions": "Permissions insuffisantes. Veuillez vérifier votre clé API et vos permissions.",
-      "no_locations": "Aucun emplacement trouvé. Veuillez vous assurer que votre Gardena Smart System est correctement configuré.",
+      "no_locations": "Aucun emplacement trouvé. Veuillez d'abord configurer votre passerelle Gardena smart dans l'application officielle Gardena, puis réessayez.",
       "server_error": "Erreur serveur survenue. Veuillez ré-essayer plus tard.",
       "auth_error": "Erreur d'authentification survenue. Veuillez vérifier vos identifiants.",
       "unknown_error": "Une erreur inattendue s'est produite. Veuillez ré-essayer.",
       "too_many_requests": "Trop de requêtes, ré-essayez plus tard.",
+      "api_error": "Impossible de se connecter à l'API Gardena. Veuillez vérifier vos identifiants et réessayer.",
       "unknown": "Erreur inattendue."
     },
     "step": {

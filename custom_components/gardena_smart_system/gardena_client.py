@@ -169,8 +169,12 @@ class GardenaSmartSystemClient:
             locations = GardenaDataParser.parse_locations_response(response)
             _LOGGER.debug(f"Found {len(locations)} locations")
             return locations
-        except Exception as e:
-            _LOGGER.error(f"Failed to fetch locations: {e}")
+        except GardenaAPIError as e:
+            if e.status_code == 404:
+                _LOGGER.error(
+                    "No locations found (404). The user has no access to any location. "
+                    "Please set up the Gardena smart Gateway in the official Gardena app first."
+                )
             raise
 
     async def get_location(self, location_id: str) -> GardenaLocation:
