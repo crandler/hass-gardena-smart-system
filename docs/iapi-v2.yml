@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.0.0
+  version: 2.3.4
   title: GARDENA smart system API
   description: Public API to query and control GARDENA smart system devices.
 servers:
@@ -1266,6 +1266,9 @@ components:
         - `PARKED_PARK_SELECTED` - The mower is parked until further notice.
         - `PARKED_AUTOTIMER` - The mower skips mowing because of insufficient grass height.
         - `PARKED_FROST` - The mower is parked due to frost.
+        - `PARKED_NO_LIGHT` - The mower is parked due to insufficient light conditions.
+        - `PARKED_MOWING_COMPLETED` - The mower is parked because all areas have been fully mowed.
+        - `PARKED_RAIN` - The mower is parked due to rain.
         - `STOPPED_IN_GARDEN` - The mower is stopped in the garden.
         - `INITIATE_NEXT_ACTION` - The mower is initiating the next action.
         - `SEARCHING_FOR_SATELLITES` - The mower is searching for satellites.
@@ -1284,6 +1287,9 @@ components:
             - PARKED_PARK_SELECTED
             - PARKED_AUTOTIMER
             - PARKED_FROST
+            - PARKED_NO_LIGHT
+            - PARKED_MOWING_COMPLETED
+            - PARKED_RAIN
             - STOPPED_IN_GARDEN
             - INITIATE_NEXT_ACTION
             - SEARCHING_FOR_SATELLITES
@@ -1411,13 +1417,36 @@ components:
         - `NO_CHARGING_STATION_SIGNAL` - Charging station not connected
         - `RADAR_ERROR` - Error reported from Radar
         - `WORK_AREA_TAMPERED` - The reference station and/or charging station has been moved
-        Synthetic errors: states in SG but warnings/errors in integration api
         - `WAIT_UPDATING`: Mower waiting, updating firmware.
         - `WAIT_POWER_UP`: Mower powering up.
         - `OFF_DISABLED`: Mower disabled on main switch.
         - `OFF_HATCH_OPEN`: Mower in waiting state with hatch open.
         - `OFF_HATCH_CLOSED`: Mower in waiting state with hatch closed.
         - `PARKED_DAILY_LIMIT_REACHED`: Mower has completed cutting due to daily limit reached.
+        - `VISION_SYSTEM_MALFUNCTION`: Camera problem.
+        - `POOR_VISION_SYSTEM_PERFORMANCE`: Camera has poor vision.
+        - `VISION_PROCESSING_FAILED`: Processing failed.
+        - `UNKNOWN`: Unknown error.
+        - `LOOP_SENSOR_PROBLEM_LEFT`: Loop sensor problem, left
+        - `LOOP_SENSOR_PROBLEM_RIGHT`: Loop sensor problem, right
+        - `WRONG_PIN_CODE`: Wrong PIN code.
+        - `LOST_WHEEL_BRUSH`: One of the Wheel brushes lost connection.
+        - `ACCESSORY_POWER_ANOMALY`: Accessory power anomaly detected.
+        - `LOOP_WIRE_BROKEN`: Loop wire is broken.
+        - `BATTERY_FET_ERROR`: Battery problem.
+        - `IMBALANCED_CUTTING_DISC`: Imbalanced cutting disc.
+        - `CUTTING_MOTOR_PROBLEM`: Cutting motor problem.
+        - `LIMITED_CUTTING_HEIGHT_RANGE`: Limited cutting height range.
+        - `CUTTING_MOTOR_DRIVE_DEFECT`: Cutting system blocked.
+        - `MEMORY_CIRCUIT_PROBLEM`: Electronic problem.
+        - `STOP_BUTTON_PROBLEM`: Stop button problem.
+        - `DIFFICULT_FINDING_HOME`: Difficult finding home.
+        - `GUIDE_CALIBRATION_ACCOMPLISHED`: Guide calibration accomplished.
+        - `TOO_MANY_BATTERIES`: Too many batteries.
+        - `ALARM_MOWER_IN_MOTION`: Alarm! Mower was moved.
+        - `ALARM_OUTSIDE_GEOFENCE`: Alarm! Outside geofence.
+        - `CONNECTION_CHANGED`: Connection changed.
+        - `CONNECTION_NOT_CHANGED`: Connection not changed.
       type: string
       anyOf:
         - enum:
@@ -1544,6 +1573,30 @@ components:
             - OFF_HATCH_OPEN
             - OFF_HATCH_CLOSED
             - PARKED_DAILY_LIMIT_REACHED
+            - VISION_SYSTEM_MALFUNCTION
+            - POOR_VISION_SYSTEM_PERFORMANCE
+            - VISION_PROCESSING_FAILED
+            - UNKNOWN
+            - LOOP_SENSOR_PROBLEM_LEFT
+            - LOOP_SENSOR_PROBLEM_RIGHT
+            - WRONG_PIN_CODE
+            - LOST_WHEEL_BRUSH
+            - ACCESSORY_POWER_ANOMALY
+            - LOOP_WIRE_BROKEN
+            - BATTERY_FET_ERROR
+            - IMBALANCED_CUTTING_DISC
+            - CUTTING_MOTOR_PROBLEM
+            - LIMITED_CUTTING_HEIGHT_RANGE
+            - CUTTING_MOTOR_DRIVE_DEFECT
+            - MEMORY_CIRCUIT_PROBLEM
+            - STOP_BUTTON_PROBLEM
+            - DIFFICULT_FINDING_HOME
+            - GUIDE_CALIBRATION_ACCOMPLISHED
+            - TOO_MANY_BATTERIES
+            - ALARM_MOWER_IN_MOTION
+            - ALARM_OUTSIDE_GEOFENCE
+            - CONNECTION_CHANGED
+            - CONNECTION_NOT_CHANGED
         - {}
     TimestampedServiceState:
       type: object

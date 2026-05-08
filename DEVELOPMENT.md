@@ -225,7 +225,7 @@ python -m pytest custom_components/gardena_smart_system/test_auth.py -v -s
 ## 📚 Resources
 
 - [Authentication Documentation](docs/AUTHENTICATION.md)
-- [Gardena Smart System API v2](iapi-v2.yml)
+- [Gardena Smart System API v2](docs/iapi-v2.yml)
 - [Home Assistant Integration Guide](https://developers.home-assistant.io/)
 
 ## 🤝 Contribution
