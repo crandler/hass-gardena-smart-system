@@ -249,7 +249,7 @@ class GardenaHumiditySensor(GardenaEntity, SensorEntity):
         self._attr_name = f"{device.name} Soil Humidity"
         self._attr_unique_id = f"{device.id}_{sensor_service.id}_soil_humidity"
         self._attr_native_unit_of_measurement = PERCENTAGE
-        self._attr_device_class = SensorDeviceClass.HUMIDITY
+        self._attr_device_class = SensorDeviceClass.MOISTURE
         self._attr_icon = "mdi:water-percent"
 
     def _get_current_sensor_service(self):
