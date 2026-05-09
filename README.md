@@ -1,69 +1,18 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [Gardena Smart System Integration v2.0.0](#gardena-smart-system-integration-v200)
-  - [⚠️ Important: Complete Reimplementation](#-important-complete-reimplementation)
-    - [Why a Complete Reimplementation?](#why-a-complete-reimplementation)
-  - [🚀 v2 New Features](#-v2-new-features)
-  - [🧪 Testing Status](#-testing-status)
-    - [✅ Tested and Working](#-tested-and-working)
-    - [⚠️ Not Yet Tested](#-not-yet-tested)
-  - [📋 Features](#-features)
-    - [Supported Entities](#supported-entities)
-    - [Lawn Mower Features](#lawn-mower-features)
-  - [🔧 Available Services](#-available-services)
-    - [🚜 Lawn Mower Services](#-lawn-mower-services)
-      - [`gardena_smart_system.mower_start`](#gardena_smart_systemmower_start)
-      - [`gardena_smart_system.mower_start_manual`](#gardena_smart_systemmower_start_manual)
-      - [`gardena_smart_system.mower_park`](#gardena_smart_systemmower_park)
-      - [`gardena_smart_system.mower_park_until_notice`](#gardena_smart_systemmower_park_until_notice)
-    - [🔌 Power Socket Services](#-power-socket-services)
-      - [`gardena_smart_system.power_socket_on`](#gardena_smart_systempower_socket_on)
-      - [`gardena_smart_system.power_socket_on_indefinite`](#gardena_smart_systempower_socket_on_indefinite)
-      - [`gardena_smart_system.power_socket_off`](#gardena_smart_systempower_socket_off)
-      - [`gardena_smart_system.power_socket_pause`](#gardena_smart_systempower_socket_pause)
-      - [`gardena_smart_system.power_socket_unpause`](#gardena_smart_systempower_socket_unpause)
-    - [🚰 Valve Services](#-valve-services)
-      - [`gardena_smart_system.valve_open`](#gardena_smart_systemvalve_open)
-      - [`gardena_smart_system.valve_close`](#gardena_smart_systemvalve_close)
-      - [`gardena_smart_system.valve_pause`](#gardena_smart_systemvalve_pause)
-      - [`gardena_smart_system.valve_unpause`](#gardena_smart_systemvalve_unpause)
-    - [🌐 WebSocket Services](#-websocket-services)
-      - [`gardena_smart_system.reconnect_websocket`](#gardena_smart_systemreconnect_websocket)
-    - [📋 System Services](#-system-services)
-      - [`gardena_smart_system.reload`](#gardena_smart_systemreload)
-      - [`gardena_smart_system.websocket_diagnostics`](#gardena_smart_systemwebsocket_diagnostics)
-    - [🔍 Finding Device IDs](#-finding-device-ids)
-  - [🛠️ Installation](#-installation)
-    - [⚠️ Important: Clean Installation Required](#-important-clean-installation-required)
-    - [Manual Installation](#manual-installation)
-    - [Configuration](#configuration)
-  - [🔧 Technical Architecture](#-technical-architecture)
-    - [File Structure](#file-structure)
-    - [Main Components](#main-components)
-      - [Coordinator (`coordinator.py`)](#coordinator-coordinatorpy)
-      - [API Client (`gardena_client.py`)](#api-client-gardena_clientpy)
-      - [Entities](#entities)
-  - [🧪 Tests](#-tests)
-    - [Running Tests](#running-tests)
-    - [Available Tests](#available-tests)
-  - [🔄 Migration from Previous Versions](#-migration-from-previous-versions)
-    - [⚠️ Migration Required](#-migration-required)
-    - [What Changes?](#what-changes)
-    - [Migration Checklist](#migration-checklist)
-  - [🐛 Troubleshooting](#-troubleshooting)
-    - [Common Issues](#common-issues)
-    - [Logs](#logs)
-  - [🤝 Contribution](#-contribution)
-  - [📄 License](#-license)
-  - [🔗 Useful Links](#-useful-links)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Gardena Smart System Integration v2.0.0
 
 A **complete reimplementation** of the Home Assistant integration for the Gardena Smart System, based on Gardena's v2 API.
+
+---
+
+If this integration keeps your garden happy, consider buying me a coffee to keep the developer happy too!
+
+<a href="https://www.buymeacoffee.com/1vHnVrIwe"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=1vHnVrIwe&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+&nbsp;&nbsp;
+<a href="https://paypal.me/grmklein" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
+
+<a href="https://www.buymeacoffee.com/1vHnVrIwe"><img src="docs/bmc-qr-code.png" width="150" alt="Buy me a coffee QR code" /></a>
+
+---
 
 ## ⚠️ Important: Complete Reimplementation
 
