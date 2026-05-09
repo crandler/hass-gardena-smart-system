@@ -121,7 +121,7 @@ class GardenaSmartSystemClient:
             elif response.status == 409:
                 _LOGGER.error("Command conflict (409) - device busy or invalid state")
                 raise GardenaCommandError("Command conflict - device may be busy", 409)
-            elif response.status in (500, 502):
+            elif response.status in (500, 502, 504):
                 # Retry server errors for commands
                 if retry_count < 3:
                     delay = 2 ** retry_count
@@ -165,7 +165,7 @@ class GardenaSmartSystemClient:
                     "Check your Husqvarna developer account or try a new API key."
                 )
                 raise GardenaAPIError("Rate limit exceeded - API quota reached", 429)
-        elif response.status in (500, 502):
+        elif response.status in (500, 502, 504):
             # Retry server errors with exponential backoff
             if retry_count < 3:
                 delay = 2 ** retry_count
