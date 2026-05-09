@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
@@ -60,6 +61,12 @@ async def async_setup_entry(
                 mower_services = device.services["MOWER"]
                 for mower_service in mower_services:
                     entities.append(GardenaMowerErrorSensor(coordinator, device, mower_service))
+
+            # Add watering end time sensors for valves
+            if "VALVE" in device.services:
+                valve_services = device.services["VALVE"]
+                for valve_service in valve_services:
+                    entities.append(GardenaValveRemainingTimeSensor(coordinator, device, valve_service))
 
             # Add sensor entities if available
             if "SENSOR" in device.services:
@@ -304,6 +311,49 @@ class GardenaLightSensor(GardenaEntity, SensorEntity):
         """Return the light intensity value."""
         current_service = self._get_current_sensor_service()
         return current_service.light_intensity if current_service else None
+
+
+class GardenaValveRemainingTimeSensor(GardenaEntity, SensorEntity):
+    """Sensor that shows the watering end time for a valve."""
+
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
+
+    def __init__(self, coordinator: GardenaSmartSystemCoordinator, device, valve_service) -> None:
+        """Initialize the valve remaining time sensor."""
+        super().__init__(coordinator, device, "VALVE")
+        self._valve_service = valve_service
+        self._device_id = device.id
+        valve_name = valve_service.name or device.name
+        self._attr_name = f"{valve_name} Watering End"
+        self._attr_unique_id = f"{device.id}_{valve_service.id}_watering_end"
+        self._attr_icon = "mdi:timer-sand"
+
+    def _get_current_valve_service(self):
+        """Get current valve service from coordinator (fresh data)."""
+        device = self.coordinator.get_device_by_id(self._device_id)
+        if device and "VALVE" in device.services:
+            for service in device.services["VALVE"]:
+                if service.id == self._valve_service.id:
+                    return service
+        return None
+
+    @property
+    def native_value(self) -> datetime | None:
+        """Return the watering end timestamp."""
+        current_service = self._get_current_valve_service()
+        if not current_service:
+            return None
+
+        if current_service.activity in ("MANUAL_WATERING", "SCHEDULED_WATERING"):
+            if current_service.duration and current_service.duration_timestamp:
+                try:
+                    start = datetime.fromisoformat(
+                        current_service.duration_timestamp.replace("Z", "+00:00")
+                    )
+                    return start + timedelta(seconds=current_service.duration)
+                except (ValueError, TypeError):
+                    return None
+        return None
 
 
 class GardenaWebSocketStatusSensor(GardenaEntity, SensorEntity):

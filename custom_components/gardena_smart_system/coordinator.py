@@ -195,6 +195,17 @@ class GardenaSmartSystemCoordinator(DataUpdateCoordinator[Dict[str, GardenaLocat
             if hasattr(service, 'last_error_code') and 'lastErrorCode' in event_data:
                 service.last_error_code = extract_value(event_data, 'lastErrorCode')
             
+            # Update valve-specific attributes
+            if hasattr(service, 'duration') and 'duration' in event_data:
+                duration_data = event_data['duration']
+                if isinstance(duration_data, dict):
+                    if 'value' in duration_data:
+                        service.duration = duration_data['value']
+                    if 'timestamp' in duration_data:
+                        service.duration_timestamp = duration_data['timestamp']
+                else:
+                    service.duration = duration_data
+
             # Update sensor-specific attributes
             if hasattr(service, 'soil_humidity') and 'soilHumidity' in event_data:
                 service.soil_humidity = extract_value(event_data, 'soilHumidity')

@@ -3,12 +3,22 @@
 import sys
 from pathlib import Path
 
+import pytest
+import pytest_asyncio
+
 # Add the project root to Python path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 # Import pytest-homeassistant-custom-component fixtures
 pytest_plugins = ["pytest_homeassistant_custom_component"]
+
+
+@pytest_asyncio.fixture(autouse=True)
+async def enable_event_loop_debug():
+    """Override the HA plugin's async fixture with a properly decorated one."""
+    pass
+
 
 # Configure Home Assistant test fixtures
 def pytest_configure(config):

@@ -77,10 +77,11 @@ class GardenaPowerSocketService(GardenaService):
 @dataclass
 class GardenaValveService(GardenaService):
     """Valve service."""
-    
+
     name: Optional[str] = None
     activity: Optional[str] = None
     duration: Optional[int] = None
+    duration_timestamp: Optional[str] = None
 
 
 @dataclass
@@ -225,6 +226,7 @@ class GardenaDataParser:
                 state=attrs.get("state", {}).get("value"),
                 activity=attrs.get("activity", {}).get("value"),
                 duration=attrs.get("duration", {}).get("value"),
+                duration_timestamp=attrs.get("duration", {}).get("timestamp"),
                 last_error_code=attrs.get("lastErrorCode", {}).get("value")
             )
         elif service_type == "VALVE_SET":
