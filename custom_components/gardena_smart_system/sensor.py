@@ -94,7 +94,7 @@ async def async_setup_entry(
                         entities.append(GardenaLightSensor(coordinator, device, sensor_service))
 
     # Add WebSocket status sensor
-    entities.append(GardenaWebSocketStatusSensor(coordinator))
+    entities.append(GardenaWebSocketStatusSensor(coordinator, entry.entry_id))
 
     _LOGGER.debug(f"Created {len(entities)} sensor entities")
     async_add_entities(entities)
@@ -359,22 +359,22 @@ class GardenaValveRemainingTimeSensor(GardenaEntity, SensorEntity):
 class GardenaWebSocketStatusSensor(GardenaEntity, SensorEntity):
     """Representation of a Gardena WebSocket status sensor."""
 
-    def __init__(self, coordinator: GardenaSmartSystemCoordinator) -> None:
+    def __init__(self, coordinator: GardenaSmartSystemCoordinator, entry_id: str) -> None:
         """Initialize the WebSocket status sensor."""
         # Create a dummy device for the base entity
         from .models import GardenaDevice
         dummy_device = GardenaDevice(
-            id="websocket_status",
+            id=f"websocket_status_{entry_id}",
             name="WebSocket Status",
             model_type="WebSocket Client",
             serial="websocket",
             services={},
             location_id=""
         )
-        
+
         super().__init__(coordinator, dummy_device, "WEBSOCKET")
         self._attr_name = "Gardena WebSocket Status"
-        self._attr_unique_id = "gardena_websocket_status"
+        self._attr_unique_id = f"gardena_websocket_status_{entry_id}"
         self._attr_icon = "mdi:connection"
 
     @property
