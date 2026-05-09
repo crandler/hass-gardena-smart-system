@@ -19,6 +19,13 @@ Release a new version of the integration.
    git push && git push origin <tag>
    ```
 
+7. For stable (non-beta) releases only: wait for the GitHub Action to create the release, then mark it as non-pre-release and latest:
+   ```
+   gh release view <tag>  # Check the release exists first
+   gh release edit <tag> --prerelease=false --latest
+   ```
+   If the release doesn't exist yet, wait a few seconds and retry `gh release view`.
+
 ## Tag format
 
 Tags use the bare version number without any prefix (no `v`):
