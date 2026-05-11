@@ -41,11 +41,6 @@ async def async_setup_entry(
                     # Return to Dock button
                     entities.append(GardenaReturnToDockButton(coordinator, device, mower_service))
 
-            # Add Measure Now button for sensor devices
-            if "SENSOR" in device.services:
-                sensor_services = device.services["SENSOR"]
-                for sensor_service in sensor_services:
-                    entities.append(GardenaMeasureNowButton(coordinator, device, sensor_service))
 
     _LOGGER.info(f"Created {len(entities)} button entities")
     _LOGGER.info(f"Adding button entities to Home Assistant: {[entity.name for entity in entities]}")
@@ -166,28 +161,3 @@ class GardenaReturnToDockButton(GardenaEntity, ButtonEntity):
             _LOGGER.error(f"No mower service available for {self._attr_name}")
 
 
-class GardenaMeasureNowButton(GardenaEntity, ButtonEntity):
-    """Button to trigger an on-demand measurement on a Gardena Smart Sensor."""
-
-    def __init__(self, coordinator: GardenaSmartSystemCoordinator, device, sensor_service) -> None:
-        """Initialize the Measure Now button."""
-        super().__init__(coordinator, device, "SENSOR")
-        self._sensor_service = sensor_service
-        self._attr_name = f"{device.name} Measure Now"
-        self._attr_unique_id = f"{device.id}_{sensor_service.id}_measure_now"
-        self._attr_icon = "mdi:refresh"
-
-    async def async_press(self) -> None:
-        """Handle the button press - trigger sensor measurement."""
-        _LOGGER.info(f"Measure Now pressed for {self.device.name} ({self._sensor_service.id})")
-        command_data = {
-            "data": {
-                "id": "measure_now_button",
-                "type": "SENSOR_CONTROL",
-                "attributes": {
-                    "command": "MEASURE",
-                },
-            }
-        }
-        await self.coordinator.client.send_command(self._sensor_service.id, command_data)
-        await self.coordinator.async_request_refresh()
