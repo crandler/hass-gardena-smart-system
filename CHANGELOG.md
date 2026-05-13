@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 
 - Mower error code sensor showing "Unknown" when there is no error (#347)
 - Light intensity sensor using invalid unit "lux" instead of "lx" for illuminance device class (#351)
+- WebSocket disconnection no longer logs a warning on transient network interruptions (#352)
 
 ## [2.1.0] - 2026-05-11
 
