@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-05-13
+
 ### Fixed
 
 - Fix ImportError for `UnitOfIlluminance` on older HA versions (#356)
