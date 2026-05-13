@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Mower error code sensor showing "Unknown" when there is no error (#347)
+- Light intensity sensor using invalid unit "lux" instead of "lx" for illuminance device class (#351)
 
 ## [2.1.0] - 2026-05-11
 
