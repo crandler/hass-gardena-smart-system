@@ -488,6 +488,10 @@ Contributions are welcome! To contribute:
 
 This project is under MIT license. See the `LICENSE` file for more details.
 
+## 📝 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a full list of changes, fixes, and breaking changes per version.
+
 ## 🔗 Useful Links
 
 - [Gardena Smart System API v2](https://developer.husqvarnagroup.cloud/)
