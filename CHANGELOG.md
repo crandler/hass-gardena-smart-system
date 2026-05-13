@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-05-13
+
 ### Breaking Changes
 
 - **WebSocket Status entity migrated from `sensor` to `binary_sensor`** — The old `sensor.gardena_websocket_status` entity is removed. A new `binary_sensor.gardena_websocket_connected` entity with device class `connectivity` replaces it. Automations using the old entity must be updated.
